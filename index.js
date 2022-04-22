@@ -22,28 +22,30 @@ function reply_click(clicked_id) {
                         document.getElementById("col1").innerHTML = new Date(row.timestamp);
                         document.getElementById("col2").innerHTML = parseFloat(row.latitude).toFixed(2);
                         document.getElementById("col3").innerHTML = parseFloat(row.longitude).toFixed(2);
+                        var trace1 = {
+                                x: [row.latitude],
+                                y: [row.longitude],
+                                mode: 'line'
+                        };
+
+                        var data = [trace1];
+
+                        var layout = {
+                                title: 'Plot of Latitude and Longitude',
+                                xaxis: {
+                                        title: 'Latitude'
+                                },
+                                yaxis: {
+                                        title: 'Longitude'
+                                }
+                        };
+
+                        Plotly.newPlot('myChart', data, layout);
+
                 })
                 .on('end', () => {
                         console.log('CSV file successfully processed');
                 });
 }
 
-var trace1 = {
-        x: [1, 2, 3, 4],
-        y: [10, 15, 13, 17],
-        mode: 'line'
-};
 
-var data = [trace1];
-
-var layout = {
-        title: 'Plot of Latitude and Longitude',
-        xaxis: {
-          title: 'Latitude'
-        },
-        yaxis: {
-          title: 'Longitude'
-        }
-      };
-
-Plotly.newPlot('myChart', data, layout);
